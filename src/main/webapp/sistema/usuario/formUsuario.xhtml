@@ -16,24 +16,89 @@
                     <fieldset>
                         <legend>Cadastro de usuários</legend>
                         <div>
-                            Nome: <p:inputText id="nome" value="#{usuarioBean.usuario.nome}"/><br></br>
-                            Conta: <p:inputText id="conta" value="#{usuarioBean.usuario.conta}"/><br></br>
-                            Senha: <p:inputText id="senha" value="#{usuarioBean.usuario.senha}"/><br></br>
+                            Nome: <p:inputText id="nome" value="#{usuarioBean.usuario.nome}" required="true"/><br></br>
+                            Conta: <p:inputText id="conta" value="#{usuarioBean.usuario.conta}" required="true"/><br></br>
+                            Senha: <p:inputText id="senha" value="#{usuarioBean.usuario.senha}" required="true"/><br></br>
                             Tipo: 
                             <p:selectOneMenu id="idTipoUsuario" value="#{usuarioBean.usuario.idTipoUsuario}" converter="converterPadrao" >
                                 <f:selectItems value="#{usuarioBean.listTipoUsuario}"
-                                           var="idTipoUsuarioItem"
-                                           itemValue="#{idTipoUsuarioItem}"/>
-                        </p:selectOneMenu>
+                                               var="idTipoUsuarioItem"
+                                               itemValue="#{idTipoUsuarioItem}"/>
+                            </p:selectOneMenu>
 
-                            
-                           
+
+
                         </div>
-                        
-                        
+
+
                     </fieldset>
                 </h:panelGroup>
+                <p:commandButton value="Salvar" update=":UsuarioForm, :datalist"
+                                 actionListener="#{usuarioBean.salvarUsuario}" icon="ui-icon-disk" />
+                <p:commandButton value="Cancelar"
+                                 action="#{usuarioBean.abrirListaUsuarios}" icon="ui-icon-close"
+                                 immediate="true" />
+
             </h:form>
+            <h:panelGroup id="Listausuarios2">
+                <p:dataTable id="datalist" value="#{usuarioBean.listUsuario}" var="s"
+                             selectionMode="single"
+                             paginator="true"
+                             rowKey="#{s.id}"
+                             rows="10"
+                             rowsPerPageTemplate="10,20,30,40,50"
+                             emptyMessage="Nenhuma Usuário Cadastrado"
+                             sortBy="#{s.id}" 
+                             sortOrder="descending"
+                             >
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:outputText value="#{s.id}"/>
+                    </p:column>
+                    <p:column filterBy="#{s.nome}">
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="#{s.nome}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Conta"/>
+                        </f:facet>
+                        <h:outputText value="#{s.conta}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Senha"/>
+                        </f:facet>
+                        <h:outputText value="#{s.senha}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="#{s.idTipoUsuario.nome}"/>
+                    </p:column>
+                    <p:column headerText="Opções" width="20%">
+
+                        <p:commandButton icon="ui-icon-pencil"
+                                         action="#{usuarioBean.prepararEditaUsuario(s) }"
+                                         title="Editar" escape="true" />
+
+                        <p:commandButton icon="ui-icon-trash"
+                                         action="#{usuarioBean.removeUsuario(s)}">
+
+                            <p:confirm header="Remover"
+                                       message="Tem certeza que deseja excluir o Usuário: #{s.conta}... "
+                                       icon="ui-icon-alert" />
+
+                        </p:commandButton>
+                    </p:column>
+
+                </p:dataTable>
+            </h:panelGroup>
         </ui:define>
     </ui:composition>
 </html>

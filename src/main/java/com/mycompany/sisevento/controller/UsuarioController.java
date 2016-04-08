@@ -37,30 +37,40 @@ public class UsuarioController extends AbstractController {
     }
 
     public void remove(Usuario entity) throws Exception {
-		try {
-			Usuario aux = entityManager.find(Usuario.class, entity.getId());
-			entityManager.remove(aux);
-		} catch (Exception e) {
-			throw new Exception(e.getMessage());
-		}
-		
-	}
-    
+        try {
+            Usuario aux = entityManager.find(Usuario.class, entity.getId());
+            entityManager.remove(aux);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
+
+    }
+
+    public Usuario pegaUsuarioId(Integer id) throws Exception {
+        try {
+            Usuario aux = entityManager.find(Usuario.class, id);
+            return aux;
+        } catch (RuntimeException re) {
+            throw new Exception(" Erro" + re.getMessage());
+        } catch (Exception e) {
+            throw new Exception(" Erro" + e.getMessage());
+        }
+
+    }
+
     public List<Usuario> findAll() throws Exception {
-		try {
-			List<Usuario> listaUsuario = new ArrayList<>();
-			String sql = "select * from usuario";
-			listaUsuario = executaSqlNativo(sql, Usuario.class, entityManager);
-			return listaUsuario;
+        try {
+            List<Usuario> listaUsuario = new ArrayList<>();
+            String sql = "select * from usuario";
+            listaUsuario = executaSqlNativo(sql, Usuario.class, entityManager);
+            return listaUsuario;
 
-		} catch (RuntimeException re) {
-			throw new Exception(" Erro" + re.getMessage());
-		} catch (Exception e) {
-			throw new Exception(" Erro" + e.getMessage());
-		}
+        } catch (RuntimeException re) {
+            throw new Exception(" Erro" + re.getMessage());
+        } catch (Exception e) {
+            throw new Exception(" Erro" + e.getMessage());
+        }
 
-	}
+    }
 
-
-    
 }

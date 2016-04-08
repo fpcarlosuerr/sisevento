@@ -26,14 +26,14 @@ public class UsuarioBean extends AbstractBean implements Serializable {
 
     @EJB
     private UsuarioController usuarioController;
-    
+
     @EJB
     private TipoUsuarioController tipoUsuarioController;
 
     private Usuario usuario;
 
     private List<Usuario> listUsuario = new ArrayList<Usuario>();
-    
+
     private List<TipoUsuario> listTipoUsuario = new ArrayList<TipoUsuario>();
 
     public UsuarioBean() {
@@ -49,14 +49,59 @@ public class UsuarioBean extends AbstractBean implements Serializable {
         }
 
     }
-    
-    public String prepararCadastroUsuario(){
+
+    public void salvarUsuario() {
+        try {
+            usuarioController.salvar(usuario);
+            showFacesMessage("salvo com sucesso!!!", 2);
+            listUsuario = new ArrayList<>();
+            listUsuario = usuarioController.findAll();
+        } catch (Exception e) {
+            showFacesMessage(e.getMessage(), 4);
+        }
+    }
+
+    public String prepararEditaUsuario(Usuario aux) {
+        try {
+            usuario = usuarioController.pegaUsuarioId(aux.getId());
+            listUsuario = new ArrayList<>();
+            listUsuario = usuarioController.findAll();
+            listTipoUsuario = new ArrayList<>();
+            listTipoUsuario = tipoUsuarioController.findAll();
+            return redirect("/sistema/usuario/formUsuario.xhtml");
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String prepararCadastroUsuario() {
         try {
             usuario = new Usuario();
+            listUsuario = new ArrayList<>();
+            listUsuario = usuarioController.findAll();
             listTipoUsuario = new ArrayList<>();
             listTipoUsuario = tipoUsuarioController.findAll();
             return redirect("/sistema/usuario/formUsuario.xhtml");
         } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String removeUsuario(Usuario aux) {
+        try {
+            
+            usuarioController.remove(aux);
+            showFacesMessage("Usuário deletado com sucesso!!!", 2);
+            usuario = new Usuario();
+            listUsuario = new ArrayList<>();
+            listUsuario = usuarioController.findAll();
+            listTipoUsuario = new ArrayList<>();
+            listTipoUsuario = tipoUsuarioController.findAll();
+            return redirect("/sistema/usuario/formUsuario.xhtml");
+
+        } catch (Exception e) {
+            showFacesMessage(e.getMessage(), 4);
             return null;
         }
     }
@@ -84,8 +129,5 @@ public class UsuarioBean extends AbstractBean implements Serializable {
     public void setListTipoUsuario(List<TipoUsuario> listTipoUsuario) {
         this.listTipoUsuario = listTipoUsuario;
     }
-    
-    
-    
 
 }
