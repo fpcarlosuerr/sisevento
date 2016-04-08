@@ -100,7 +100,7 @@ public class TipoUsuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.sisevento.entity.TipoUsuario[ id=" + id + " ]";
+        return nome;
     }
     
 }

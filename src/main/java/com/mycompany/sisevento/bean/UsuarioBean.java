@@ -5,7 +5,9 @@
  */
 package com.mycompany.sisevento.bean;
 
+import com.mycompany.sisevento.controller.TipoUsuarioController;
 import com.mycompany.sisevento.controller.UsuarioController;
+import com.mycompany.sisevento.entity.TipoUsuario;
 import com.mycompany.sisevento.entity.Usuario;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,10 +26,15 @@ public class UsuarioBean extends AbstractBean implements Serializable {
 
     @EJB
     private UsuarioController usuarioController;
+    
+    @EJB
+    private TipoUsuarioController tipoUsuarioController;
 
     private Usuario usuario;
 
     private List<Usuario> listUsuario = new ArrayList<Usuario>();
+    
+    private List<TipoUsuario> listTipoUsuario = new ArrayList<TipoUsuario>();
 
     public UsuarioBean() {
     }
@@ -41,6 +48,17 @@ public class UsuarioBean extends AbstractBean implements Serializable {
             return null;
         }
 
+    }
+    
+    public String prepararCadastroUsuario(){
+        try {
+            usuario = new Usuario();
+            listTipoUsuario = new ArrayList<>();
+            listTipoUsuario = tipoUsuarioController.findAll();
+            return redirect("/sistema/usuario/formUsuario.xhtml");
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public Usuario getUsuario() {
@@ -58,6 +76,15 @@ public class UsuarioBean extends AbstractBean implements Serializable {
     public void setListUsuario(List<Usuario> listUsuario) {
         this.listUsuario = listUsuario;
     }
+
+    public List<TipoUsuario> getListTipoUsuario() {
+        return listTipoUsuario;
+    }
+
+    public void setListTipoUsuario(List<TipoUsuario> listTipoUsuario) {
+        this.listTipoUsuario = listTipoUsuario;
+    }
+    
     
     
 

@@ -6,6 +6,8 @@
 package com.mycompany.sisevento.controller;
 
 import com.mycompany.sisevento.entity.TipoUsuario;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -43,4 +45,19 @@ public class TipoUsuarioController extends AbstractController {
         }
 
     }
+    
+    public List<TipoUsuario> findAll() throws Exception {
+		try {
+			List<TipoUsuario> listaTipoUsuario = new ArrayList<>();
+			String sql = "select * from tipo_usuario";
+			listaTipoUsuario = executaSqlNativo(sql, TipoUsuario.class, entityManager);
+			return listaTipoUsuario;
+
+		} catch (RuntimeException re) {
+			throw new Exception(" Erro" + re.getMessage());
+		} catch (Exception e) {
+			throw new Exception(" Erro" + e.getMessage());
+		}
+
+	}
 }
