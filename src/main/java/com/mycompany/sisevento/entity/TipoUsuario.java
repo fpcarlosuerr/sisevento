@@ -41,6 +41,7 @@ public class TipoUsuario implements Serializable {
     @Column(name = "id")
     private Integer id;
     @Size(max = 2147483647)
+
     @Column(name = "nome")
     private String nome;
     @OneToMany(mappedBy = "idTipoUsuario")

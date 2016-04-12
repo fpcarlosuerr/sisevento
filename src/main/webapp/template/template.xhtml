@@ -1,63 +1,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-<f:view locale="pt_BR">
-	<h:head>
-		<title><ui:insert name="title">#{msg['titulo-sistema']}</ui:insert></title>
-		<h:outputStylesheet name="estilo.css" library="css" />
-		<!-- 		<h:outputScript name="scripts.js" library="js" /> -->
-		<h:outputScript name="calendar_ptbr.js" library="js" />
-	</h:head>
-	<h:body>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view locale="pt_BR">
+        <h:head>
+            <title><ui:insert name="title">#{msg['titulo-sistema']}</ui:insert></title>
+            <h:outputStylesheet name="estilo.css" library="css" />
+            <!-- 		<h:outputScript name="scripts.js" library="js" /> -->
+            <h:outputScript name="calendar_ptbr.js" library="js" />
+            <h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
+            <h:outputStylesheet library="bootstrap/css" name="bootstrap-theme.min.css" />
+            <h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+           <!-- <h:outputScript library="jquery" name="jquery-2.1.4.min.js" />-->
+
+        </h:head>
+        <h:body>
 
 
-		<p:dialog modal="true" widgetVar="statusDialog"
-			header="Por favor aguarde" draggable="false" closable="false"
-			resizable="false">
-			<p:graphicImage value="/resources/images/barracarregando.gif" />
-		</p:dialog>
+            <p:dialog modal="true" widgetVar="statusDialog"
+                      header="Por favor aguarde" draggable="false" closable="false"
+                      resizable="false">
+                <p:graphicImage value="/resources/images/barracarregando.gif" />
+            </p:dialog>
 
 
 
-		<div align="center">
-			<h:form id="formtop">
-				<table width="100%" border="0" cellspacing="0">
-					<tr>
-						<td align="left" width="30"><h:graphicImage name="logo_uerr.png"
-								library="images" height="40" width="90" /></td>
-						<td align="left" valign="middle">&nbsp;&nbsp;<h:outputText
-								value="Aula de Java WEB" styleClass="titulo-produto" /></td>
-						<td width="20%"><h:outputText value="Usuário: " /> <h:outputText
-								value="#" /> <h:outputText
-								value="#" /> <!-- <h:outputText value="#{usuarioBean.logon}" /> -->
-							<br /></td>
-						<td align="right"><h:graphicImage name="javaweb.png"
-								library="images" height="40" width="90" /></td>
-					</tr>
-				</table>
-			</h:form>
-		</div>
-		<div align="center">
-			<ui:include src="/template/formMenu.xhtml" />
-		</div>
-		<br />
-		<br />
-		<h:form id="formTemplet">
-			<p:confirmDialog global="true" showEffect="fade">
-				<p:commandButton value="Sim" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="Não" type="button"
-					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
-		</h:form>
-		<div style="height: 200px">
-			<ui:insert name="content">Content</ui:insert>
-		</div>
+            <div align="center">
+                <h:form id="formtop">
+                    <table width="100%" border="0" cellspacing="0">
+                        <tr>
+                            <td align="left" width="30"><h:graphicImage name="logo_uerr.png"
+                                                                        library="images" height="40" width="90" /></td>
+                            <td align="left" valign="middle">&nbsp;&nbsp;<h:outputText
+                                    value="Aula de Java WEB" styleClass="titulo-produto" /></td>
+                            <td width="20%"><h:outputText value="Usuário: " /> <h:outputText
+                                    value="#" /> <h:outputText
+                                    value="#" /> <!-- <h:outputText value="#{usuarioBean.logon}" /> -->
+                                <br /></td>
+                            <td align="right"><h:graphicImage name="javaweb.png"
+                                                              library="images" height="40" width="90" /></td>
+                        </tr>
+                    </table>
+                </h:form>
+            </div>
+            <div align="center">
+                <ui:include src="/template/formMenu.xhtml" />
+            </div>
+            <br />
+            <br />
+            <h:form id="formTemplet">
+                <p:confirmDialog global="true" showEffect="fade">
+                    <p:commandButton value="Sim" type="button"
+                                     styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="Não" type="button"
+                                     styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+            </h:form>
+            <div style="height: 200px">
+                <ui:insert name="content">Content</ui:insert>
+            </div>
 
-	</h:body>
-</f:view>
+        </h:body>
+    </f:view>
 </html>
 
